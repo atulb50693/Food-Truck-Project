@@ -18,14 +18,14 @@ DB_PASSWORD=<your_database_password>
 DB_PORT=3306
 ```
 
+### Get Started
+
 The resulting dashboard can be seen by:
 
 1. Installing the required dependencies to run the file by running `pip3 install -r requirements.txt` in a `.venv`
 
 2. Then to view the dashboard, run the command `streamlit run financial_dashboard.py`
 
-
-### Resulting Dashboard
 
 The wireframe for the dashboard:
 
