@@ -26,9 +26,9 @@ jobs:
     
     - run: |
         echo installing dependencies...
-        bash ${GITHUB_WORKSPACE}/scripts/installing_dependencies.sh
+        bash ${GITHUB_WORKSPACE}/bash-scripts/installing_dependencies.sh
         pip install pylint
 
     - name: lint code
       run: |
-          bash ${GITHUB_WORKSPACE}/scripts/pylint_directories.sh
+          bash ${GITHUB_WORKSPACE}/bash-scripts/pylint_directories.sh

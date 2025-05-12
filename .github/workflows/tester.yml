@@ -25,10 +25,10 @@ jobs:
             
         - run: |
             echo installing dependencies...
-            bash ${GITHUB_WORKSPACE}/scripts/installing_dependencies.sh
+            bash ${GITHUB_WORKSPACE}/bash-scripts/installing_dependencies.sh
             pip install pytest
 
         - run: |
             echo running pytest on the all folders...
-            bash ${GITHUB_WORKSPACE}/scripts/test_directories.sh
+            bash ${GITHUB_WORKSPACE}/bash-scripts/test_directories.sh
             
