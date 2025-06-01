@@ -13,36 +13,8 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-variable "DB_USER" {
-  type=string
-}
-
-variable "DB_PASSWORD" {
-  type=string
-}
-
-variable "DB_NAME" {
-  type=string
-}
-
-variable "DB_PORT" {
-  type=string
-}
-
-variable "DB_HOST" {
-  type=string
-}
-
-variable "aws_access_key_id" {
-  type=string
-}
-
-variable "aws_secret_access_key" {
-  type=string
-}
-
-data "aws_ecr_image" "service_image" {
-  repository_name = "c16-tul-abuelhia-pipeline"
+data "aws_ecr_image" "c16-ta-pipeline" {
+  repository_name = "c16-ta-pipeline"
   image_tag       = "latest"
 }
 
@@ -96,13 +68,13 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
-resource "aws_cloudwatch_log_group" "c16-tul-abuelhia-email-report-lg" {
-  name              = "/aws/lambda/c16-tul-abuelhia-email-report"
+resource "aws_cloudwatch_log_group" "c16-ta-email-report-lg" {
+  name              = "/aws/lambda/c16-ta-email-report"
   retention_in_days = 14
 }
 
 resource "aws_lambda_function" "c16-tul-abuelhia-email-report" {
-    image_uri = "129033205317.dkr.ecr.eu-west-2.amazonaws.com/c16-tul-abuelhia-email-report:latest"
+    image_uri = data.aws_ecr_image.c16-ta-pipeline.image_uri
     function_name = "c16-tul-abuelhia-email-report"
     role          = aws_iam_role.iam_for_lambda.arn
     package_type = "Image"
@@ -123,12 +95,12 @@ resource "aws_lambda_function" "c16-tul-abuelhia-email-report" {
 
     logging_config {
         log_format = "Text"
-        log_group = aws_cloudwatch_log_group.c16-tul-abuelhia-email-report-lg.name
+        log_group = aws_cloudwatch_log_group.c16-ta-email-report-lg.name
     }
     
     depends_on = [
         aws_iam_role_policy_attachment.lambda_logs,
-        aws_cloudwatch_log_group.c16-tul-abuelhia-email-report-lg,
+        aws_cloudwatch_log_group.c16-ta-email-report-lg,
     ]
 }
 
