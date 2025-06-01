@@ -61,6 +61,8 @@ Once the ECR repository has been set up with a Docker image, only step 5 is requ
 
 * `report_data_2025-03-25.html` - which is an example email using data in the form of a html file.
 
+* `report_data_2025-03-25.json` - which is example data used within an email in JSON format.
+
 
 ## IMPORTANT
 
