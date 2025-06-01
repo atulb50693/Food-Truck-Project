@@ -1,9 +1,9 @@
 # Food Truck Project: Financial Analytics Dashboard
 
 ## Table of Contents
-- [Overview](#overview)
-- [Contents](#contents)
-- [System Architecture](#system-architecture)
+- [Overview](#-overview)
+- [Contents](#️-contents)
+- [System Architecture](#system-architecture-diagram)
 
 
 ## 📖 Overview
@@ -36,6 +36,6 @@ Within the `.github/workflows` directory, there are two files `pylinter.yml` and
 These files create jobs using Github Actions on any python scripts within a pull request or commit, which run pylint and pytest to ensure high accuracy and quality in the code provided.
 
 
-# Architecture Diagram
+# System Architecture Diagram
 
-![Architecture Diagram](assets/architecture_diagram_food_truck_proj.png)
+<img src="assets/architecture_diagram_food_truck_proj.png" alt="isolated" width="500">

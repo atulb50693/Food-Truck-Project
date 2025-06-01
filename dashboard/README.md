@@ -8,7 +8,7 @@ This folder contains a Streamlit dashboard that loads data from the MySQL RDS us
 
 To install requirements run: `pip install -r requirements.txt`
 
-A .env file must be created within this directory and contain the variables:
+A `.env` file must be created within this directory and contain the variables:
 
 ```
 DB_HOST=<your_database_address>
@@ -29,6 +29,6 @@ The resulting dashboard can be seen by:
 
 The wireframe for the dashboard:
 
-<img src="wireframe_financial_dashboard.png" alt="isolated" width="800"/>
+<img src="../assets/wireframe_financial_dashboard.png" alt="isolated" width="800">
 
 
