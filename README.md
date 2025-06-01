@@ -15,17 +15,19 @@ To solve this, I built an automated ETL pipeline that filtered and cleaned Parqu
 ## 🗂️ Contents
 Each directory has their own README file containing a deep overview of the purpose of the directory and how to run it for yourself. These directories are provided in order of use to implement this project:
 
-- `database`: Schema setup and data model
+- `database`: schema setup and data model
 
 - `pipeline`: ETL pipeline including data scraping, transformation, and loading
 
-- `dashboard`: Frontend interface for users (using Streamlit)
+- `dashboard`: frontend interface for users (using Streamlit)
 
-- `email`: Scripts for creating and automating email updates 
+- `email`: scripts for creating and automating email updates 
 
-- `bash-scripts`: Scripts for automated code quality and testing checks (using CI).
+- `bash-scripts`: scripts for automated code quality and testing checks (using CI).
 
-- `utilities`: Scripts that automate common tasks e.g: clearing the database.
+- `utilities`: scripts that automate common tasks e.g: clearing the database.
+
+- `assets`: contains images for the system architecture and the wireframe design of the dashboard.
 
 
 ## 🤖 Automated testing & linting
