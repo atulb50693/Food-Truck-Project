@@ -13,8 +13,8 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-data "aws_ecr_image" "c16-ta-pipeline" {
-  repository_name = "c16-ta-pipeline"
+data "aws_ecr_image" "c16-ta-lambda" {
+  repository_name = "c16-ta-lambda"
   image_tag       = "latest"
 }
 
@@ -73,8 +73,8 @@ resource "aws_cloudwatch_log_group" "c16-ta-email-report-lg" {
   retention_in_days = 14
 }
 
-resource "aws_lambda_function" "c16-tul-abuelhia-email-report" {
-    image_uri = data.aws_ecr_image.c16-ta-pipeline.image_uri
+resource "aws_lambda_function" "c16-ta-email-report-lambda" {
+    image_uri = data.aws_ecr_image.c16-ta-lambda.image_uri
     function_name = "c16-tul-abuelhia-email-report"
     role          = aws_iam_role.iam_for_lambda.arn
     package_type = "Image"

@@ -13,36 +13,8 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-variable "DB_USER" {
-  type=string
-}
-
-variable "DB_PASSWORD" {
-  type=string
-}
-
-variable "DB_NAME" {
-  type=string
-}
-
-variable "DB_PORT" {
-  type=string
-}
-
-variable "DB_HOST" {
-  type=string
-}
-
-variable "aws_access_key_id" {
-  type=string
-}
-
-variable "aws_secret_access_key" {
-  type=string
-}
-
-data "aws_ecr_image" "service_image" {
-  repository_name = "c16-tul-abuelhia-pipeline"
+data "aws_ecr_image" "c16-ta-pipeline" {
+  repository_name = "c16-ta-pipeline"
   image_tag       = "latest"
 }
 
@@ -51,15 +23,15 @@ data "aws_iam_role" "ecs_task_execution_role" {
 }
 
 resource "aws_ecs_task_definition" "task" {
-    family = "c16-tul-abuelhia-pipeline"
+    family = "c16-ta-pipeline"
     requires_compatibilities = ["FARGATE"]
     network_mode             = "awsvpc"
     cpu = 512
     memory = 1024
     execution_role_arn = data.aws_iam_role.ecs_task_execution_role.arn
     container_definitions = jsonencode([{
-        name      = "c16-tul-abuelhia-pipeline"
-        image     = "129033205317.dkr.ecr.eu-west-2.amazonaws.com/c16-tul-abuelhia-pipeline:latest"
+        name      = "c16-ta-pipeline"
+        image = "${data.aws_ecr_image.c16-ta-pipeline.image_uri}:latest"
         essential = true
         command = ["python3", "pipeline.py"]
         environment = [
@@ -100,7 +72,7 @@ resource "aws_ecs_task_definition" "task" {
         logConfiguration = {
             logDriver = "awslogs",
             options = {
-                awslogs-group = "ecs/c16-tul-abuelhia-pipeline",
+                awslogs-group = "ecs/c16-ta-pipeline",
                 awslogs-region = "eu-west-2",
                 awslogs-stream-prefix = "ecs"
                 }

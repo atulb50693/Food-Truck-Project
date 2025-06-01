@@ -36,6 +36,8 @@ This folder contains all the files required to set up the pipeline for the MySQL
 * `load.py`  
  A python script that test loads a couple of rows of the cleaned data to the MySQL database
 
+* `Dockerfile` - which includes the commands required to convert the pipeline python script into a Docker image
+
 * `/data-files`
  A directory that contains all the downloaded data files and the final cleaned version produced by the `transform.py` script
 
@@ -58,7 +60,7 @@ aws_secret_access_key=<your_aws_secret_access_key>
 aws_access_key_id=<your_aws_access_key_id>
 DB_HOST=<your_database_address> 
 DB_NAME=<your_database_name>
-DB_USERNAME=<your_database_username>
+DB_USER=<your_database_username>
 DB_PASSWORD=<your_database_password>
 DB_PORT=3306
 ```
@@ -66,13 +68,44 @@ DB_PORT=3306
 
 ## Get started
 
-To run the pipeline, the steps are as follows:
+To run the pipeline locally, the steps are as follows:
 
-1. Set up a virtual environment for the repository and install the necessary packages in `./pipeline/` by running the command `pip3 install -r requirements.txt`
+1. Set up a virtual environment for the repository and install the necessary packages in `./pipeline/` by running the command `pip3 install -r requirements.txt`.
 
 2. Set up a new `.env` file in the `./pipeline/`, containing all the variables listed under **Files Explained**.
 
 3. Run `python pipeline.py -l` to start the pipeline script. 
 
+### Terraform
+
+To run the pipeline on AWS, you have to create the following resources by running the terraform files within `terraform/` by:
+
+1. Run `terraform init`
+
+2. Set up a new ECR image repository on your AWS account and change the repository name in `main.tf` to the name of the newly created ECR repository.
+
+3. Carry out the steps within the ['Get Started'](#get-started-1) section below to add a Docker image to the ECR repository that have been created in step 2.
+
+5. Run `terraform apply` once complete to apply the rest of script.
+
+Once the ECR repository has been set up with a Docker image, only step 5 is required to set up the infrastructure from now on.
 
 
+#### Get started <a name="dockerise_image"></a>
+
+To set up the ECR repository with the pipeline as a lambda Docker image, carry out the following steps after carrying out steps 1 and 2 from the terraform section:
+
+
+1. Set up a .env of format:
+
+```
+DB_USER=
+DB_PASSWORD=
+DB_PORT=
+DB_NAME=
+DB_HOST=
+```
+
+2. Follow the steps on [here](https://docs.aws.amazon.com/lambda/latest/dg/python-image.html#python-image-instructions) to dockerise the python script, making sure to use the ` --env-file .env` flag for docker build.
+
+3. Follow the push commands on the AWS console for the relevant ECR repository

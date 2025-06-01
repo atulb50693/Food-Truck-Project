@@ -71,7 +71,7 @@ Once the ECR repository has been set up with a Docker image, only step 5 is requ
 
 ## Get started <a name="dockerise_image"></a>
 
-To set up the ECR repository with the lambda Docker image, carry out the following steps after carrying out steps 1 and 2 from the terraform section:
+To set up the ECR repository with the email report as a lambda Docker image, carry out the following steps after carrying out steps 1 and 2 from the terraform section:
 
 
 1. Set up a .env of format:
